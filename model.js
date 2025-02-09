@@ -2,6 +2,10 @@ const Model = async() => {
     const surface1 = document.getElementById("model1");
     const surface2 = document.getElementById("model2");
 
+    surface2.innerHTML = `<div style="width: 100%; display: flex; justify-content: center;">
+            <div id="loader"></div>
+        </div>`;
+
     const data = await fetch("./carsData.json");
     let cars = await data.json();
     
@@ -36,6 +40,7 @@ const Model = async() => {
     model.compile({ loss: 'meanSquaredError', optimizer: 'sgd' });
 
     // Train model
+    surface2.innerHTML = ``;
     await trainModel(model, nmInputs, nmLabels, surface2);
 
     // unNormalize the data
@@ -85,4 +90,4 @@ async function trainModel(model, inputs, labels, surface) {
     );
 }
 
-Model()
+Model();
